@@ -2,7 +2,7 @@ const Product = require('../models/Product');
 
 exports.createProduct = async (req, res) => {
   try {
-    const newProduct = new Product(req.body);
+    const newProduct = new Product({...req.body, image: req.file.path});
     const saved = await newProduct.save();
     res.status(201).json(saved);
   } catch (err) {
